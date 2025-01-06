@@ -1,0 +1,88 @@
+Mon Feb 12 07:31:56 UTC 2024
+Linux LinuxMachine 5.15.133.1-microsoft-standard-WSL2 #1 SMP Thu Oct 5 21:02:42 UTC 2023 x86_64 x86_64 x86_64 GNU/Linux
+uid=1000(cssuwbstudent) gid=1000(cssuwbstudent) groups=1000(cssuwbstudent),10(wheel)
+=====================================================
+1. If the section below is empty, the program compiles 
+   without warnings with -Wall -Wextra flags
+=====================================================
+graph.cpp: In member function ‘int Graph::mstKruskal(void (*)(const string&, const string&, int)) const’:
+graph.cpp:363:28: warning: unused parameter ‘visit’ [-Wunused-parameter]
+ int Graph::mstKruskal(void visit(const string &from, const string &to,
+                       ~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                  int weight)) const {
+                                  ~~~~~~~~~~~
+=====================================================
+2. If the section below is empty or has the expected output 
+    the program puns and produces correct output
+=====================================================
+testGraph0DFS
+testGraph0BFS
+testGraph0Dijkstra
+testGraph0NotDirected
+a.out: graphtest.cpp:208: void testGraph0NotDirected(): Assertion `mstLength == 4 && "mstKruskal is 4"' failed.
+./create-output.sh: line 40: 37184 Aborted                 $EXEC_PROGRAM
+=====================================================
+3. If the section below is empty, then there are no clang-tidy warnings 
+   (ignore warnings from system headers, such as "13554 warnings generated.")
+=====================================================
+22756 warnings generated.
+38173 warnings generated.
+49536 warnings generated.
+/home/cssuwbstudent/juanseo/343-graph-juanseo0/graph.cpp:363:12: error: method 'mstKruskal' can be made static [readability-convert-member-functions-to-static,-warnings-as-errors]
+int Graph::mstKruskal(void visit(const string &from, const string &to,
+           ^
+Suppressed 49535 warnings (49535 in non-user code).
+Use -header-filter=.* to display errors from all non-system headers. Use -system-headers to display errors from system headers as well.
+1 warning treated as error
+=====================================================
+4. If the section below is empty, clang-format does not find any formatting issues
+   You can fix formatting errors using "clang-format -i <filename>" on command line
+=====================================================
+Running clang-format on ./graph.cpp
+Running clang-format on ./graphtest.cpp
+Running clang-format on ./main.cpp
+=====================================================
+5. If there are any memory leaks, it should be in the output below
+=====================================================
+./create-output.sh: line 78: 37330 Aborted                 $EXEC_PROGRAM > /dev/null 2> /dev/null
+=====================================================
+6. Using valgrind to check for memory leaks
+   Check for "definitely lost" in the output below
+=====================================================
+./create-output.sh: line 96: 37364 Aborted                 valgrind --log-file="valgrind-output.txt" $EXEC_PROGRAM > /dev/null 2> /dev/null
+==37364== Memcheck, a memory error detector
+==37364== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==37364== Using Valgrind-3.19.0 and LibVEX; rerun with -h for copyright info
+==37364== Command: ./a.out
+==37364== Parent PID: 37129
+==37364== 
+==37364== 
+==37364== Process terminating with default action of signal 6 (SIGABRT)
+==37364==    at 0x57C4AFF: raise (in /usr/lib64/libc-2.28.so)
+==37364==    by 0x5797EA4: abort (in /usr/lib64/libc-2.28.so)
+==37364==    by 0x5797D78: __assert_fail_base.cold.0 (in /usr/lib64/libc-2.28.so)
+==37364==    by 0x57BD455: __assert_fail (in /usr/lib64/libc-2.28.so)
+==37364==    by 0x41970F: testGraph0NotDirected() (graphtest.cpp:208)
+==37364==    by 0x41A639: testAll() (graphtest.cpp:251)
+==37364==    by 0x41BE9B: main (main.cpp:13)
+==37364== 
+==37364== HEAP SUMMARY:
+==37364==     in use at exit: 77,096 bytes in 9 blocks
+==37364==   total heap usage: 255 allocs, 246 frees, 129,336 bytes allocated
+==37364== 
+==37364== LEAK SUMMARY:
+==37364==    definitely lost: 0 bytes in 0 blocks
+==37364==    indirectly lost: 0 bytes in 0 blocks
+==37364==      possibly lost: 0 bytes in 0 blocks
+==37364==    still reachable: 77,096 bytes in 9 blocks
+==37364==         suppressed: 0 bytes in 0 blocks
+==37364== Rerun with --leak-check=full to see details of leaked memory
+==37364== 
+==37364== For lists of detected and suppressed errors, rerun with: -s
+==37364== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+Mon Feb 12 07:32:12 UTC 2024
+=====================================================
+To create an output.txt file with all the output from this script
+Run the below command
+      ./create-output.sh > output.txt 2>&1 
+=====================================================
