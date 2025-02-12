@@ -1,7 +1,7 @@
 # Graph
 
 Graph class with several graph algorithms including depth-first search, 
-breadth-first search, dijkstra's shortest path, minimum spanning tree
+breadth-first search, dijkstra's shortest path, prim's algorith, Kruskal's algorithm
 
 
 ## Included Files
